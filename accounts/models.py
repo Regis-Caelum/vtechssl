@@ -11,4 +11,4 @@ class product(models.Model):
     belongs_to = models.ManyToManyField(User)
 
     def __str__(self):
-        return f"{self.created_at}  {self.updated_at}   {self.attribute1}   {self.attribute2}   {self.attribute3}   {self.attribute4}"
+        return f"{self.created_at}  {self.updated_at}   {self.attribute}"
