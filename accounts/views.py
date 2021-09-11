@@ -12,9 +12,9 @@ def index(request):
     return render(request, '../templates/home.html')
 
 def postdata(request):
-    if request.method == 'POST':
-        data = reqiuest.POST["attribute"]
-        attribute = reqiuest.POST["attribute"]
+    if request.method == 'GET':
+        data = reqiuest.GET["attribute"]
+        attribute = reqiuest.GET["attribute"]
         print(f'{data} -- {attribute}')
     return Http404
 
