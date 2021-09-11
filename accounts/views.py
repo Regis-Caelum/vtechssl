@@ -11,6 +11,13 @@ from .models import product
 def index(request):
     return render(request, '../templates/home.html')
 
+def postdata(request):
+    if request.method == 'POST':
+        data = reqiuest.POST["attribute"]
+        attribute = reqiuest.POST["attribute"]
+        print(f'{data} -- {attribute}')
+    return Http404
+
 @login_required(login_url='/login')
 @permission_required('accounts.add_user')
 def CreateUser(request):
