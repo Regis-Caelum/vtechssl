@@ -8,7 +8,14 @@ class product(models.Model):
     serial_no  = models.CharField(max_length=255,null=False,unique=False)
     location   = models.CharField(max_length=255,null=False)
     attribute = models.CharField(max_length=255,null=False)
+    status = models.CharField(max_length=255,null=False)
+    battery_status = models.CharField(max_length=255,null=False)
+    battery_voltage = models.CharField(max_length=255,null=False)
+    power_panel = models.CharField(max_length=255,null=False)
+    panel_voltage = models.CharField(max_length=255,null=False)
+    energy_curr = models.CharField(max_length=255,null=False)
+    total_energy = models.CharField(max_length=255,null=False)
     belongs_to = models.ManyToManyField(User)
 
     def __str__(self):
-        return f"{self.created_at}  {self.updated_at}   {self.attribute}"
+        return f"{self.serial_no}"

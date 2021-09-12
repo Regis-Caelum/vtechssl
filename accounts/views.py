@@ -12,11 +12,29 @@ def index(request):
     return render(request, '../templates/home.html')
 
 def postdata(request):
-    if request.method == 'GET':
-        data = reqiuest.GET["attribute"]
-        attribute = reqiuest.GET["attribute"]
-        print(f'{data} -- {attribute}')
-    return Http404
+    serial = request.POST["serial"]
+    status = request.POST["stat"]
+    battery_status = request.POST["batstat"]
+    battery_voltage = request.POST["volt"]
+    power_panel = request.POST["powpanel"]
+    panel_voltage = request.POST["panelvolt"]
+    Energy_curr = request.POST["engcurr"]
+    Total_energy = request.POST["totaleng"]
+    
+    pr = product.objects.get(serial_no=serial)
+
+    if pr is None:
+        return Http404
+    
+    pr.attribute = 'puppi'
+    pr.status = status
+    pr.battery_status = battery_status
+    pr.battery_voltage = battery_voltage
+    pr.power_panel = power_panel
+    pr.panel_voltage = panel_voltage
+    pr.energy_curr = Energy_curr
+    pr.total_energy = Total_energy
+    pr.save()
 
 @login_required(login_url='/login')
 @permission_required('accounts.add_user')
@@ -112,14 +130,25 @@ def ViewUsers(request):
         return
     pass
 
-@login_required(login_url='/login')
+# @login_required(login_url='/login')
 def ViewProduct(request):
-    if request.method == 'POST':
-        serialno = request.POST['serialno']
-        e_date = request.POST['date']
-        products = product.objects.filter(updated_at__gte=e_date)
-        return 
-    return
+    # if request.method == 'POST':
+        # name = request.POST['name']
+        # e_date = request.POST['date']
+        name = 'mani'
+        products = product.objects.filter(serial_no='123456789')
+        if products is None:
+            print('None')
+            return Http404
+        products = list(products)
+        users = [i.belongs_to.all() for i in products ]
+        print(products[0].belongs_to.all())
+        context = {
+            'products': products,
+            'user': users
+        }
+        return render(request, '../templates/table.html',context)
+    # return
 
 @login_required(login_url='/login')
 @permission_required('accounts.add_user')

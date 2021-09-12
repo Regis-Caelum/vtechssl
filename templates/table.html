@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block body %}
+<table>
+  {% for p in products %}
+  <tr>
+    <td>{{p.created_at}}</td>
+    <td>{{p.updated_at}}</td>
+    <td>{{p.serial_no}}</td>
+    <td>{{p.location}}</td>
+    <td>{{p.attribute}}</td>
+    <td>{{p.status}}</td>
+    <td>{{p.battery_status}}</td>
+    <td>{{p.battery_voltage}}</td>
+    <td>{{p.power_panel}}</td>
+    <td>{{p.panel_voltage}}</td>
+    <td>{{p.energy_curr}}</td>
+    <td>{{p.total_energy}}</td>
+    {% for u in user %} {% for p in u %}
+    <td>{{p.username}}</td>
+    {% endfor %} {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+{% endblock body %}
