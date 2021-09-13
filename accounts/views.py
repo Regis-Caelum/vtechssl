@@ -12,14 +12,14 @@ def index(request):
     return render(request, '../templates/home.html')
 
 def postdata(request):
-    serial = request.POST["serial"]
-    status = request.POST["stat"]
-    battery_status = request.POST["batstat"]
-    battery_voltage = request.POST["volt"]
-    power_panel = request.POST["powpanel"]
-    panel_voltage = request.POST["panelvolt"]
-    Energy_curr = request.POST["engcurr"]
-    Total_energy = request.POST["totaleng"]
+    serial = request.GET["serial"]
+    status = request.GET["stat"]
+    battery_status = request.GET["batstat"]
+    battery_voltage = request.GET["volt"]
+    power_panel = request.GET["powpanel"]
+    panel_voltage = request.GET["panelvolt"]
+    Energy_curr = request.GET["engcurr"]
+    Total_energy = request.GET["totaleng"]
     
     pr = product.objects.get(serial_no=serial)
 
@@ -135,7 +135,6 @@ def ViewProduct(request):
     if request.method == 'POST':
         name = request.POST['name']
         # e_date = request.POST['date']
-        name = 'mani'
         products = product.objects.filter(belongs_to__username=name)
         if products is None:
             print('None')
