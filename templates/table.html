@@ -1,23 +1,56 @@
 {% extends "base.html" %} {% block body %}
-<table>
-  {% for p in products %}
-  <tr>
-    <td>{{p.created_at}}</td>
-    <td>{{p.updated_at}}</td>
-    <td>{{p.serial_no}}</td>
-    <td>{{p.location}}</td>
-    <td>{{p.attribute}}</td>
-    <td>{{p.status}}</td>
-    <td>{{p.battery_status}}</td>
-    <td>{{p.battery_voltage}}</td>
-    <td>{{p.power_panel}}</td>
-    <td>{{p.panel_voltage}}</td>
-    <td>{{p.energy_curr}}</td>
-    <td>{{p.total_energy}}</td>
-    {% for u in user %} {% for p in u %}
-    <td>{{p.username}}</td>
-    {% endfor %} {% endfor %}
-  </tr>
-  {% endfor %}
-</table>
+<table></table>
+
+<div class="main2">
+  <h5 style="text-align: center; padding: 20px 0">SSL Serial Numbers</h5>
+  <div class="form">
+    <form
+      action="table"
+      style="display: flex; flex-direction: row; padding-right: 20px"
+      method="POST"
+    >
+      {% csrf_token %}
+      <h6 class="select1" style="padding: 0 20px">Username</h6>
+      <input class="select1" type="text" name="name" />
+      <input class="select1" type="submit" />
+
+      <h6 class="select1" style="padding: 0 20px">Date</h6>
+      <input class="select1" type="date" name"date" />
+      <input class="select1" type="submit" />
+    </form>
+
+    <table class="tbody" style="padding: 20px 0px">
+      <tr>
+        <th>Serial no.</th>
+        <th>Created at</th>
+        <th>Last Communication</th>
+        <th>SSL Status</th>
+        <th>Battery Status</th>
+        <th>Battery Voltage (V)</th>
+        <th>Panel Power (W)</th>
+        <th>Panel Voltage (V)</th>
+        <th>Energy Today</th>
+        <th>Total Energy</th>
+        <th>User</th>
+      </tr>
+      {% for p in products %}
+      <tr>
+        <td>{{p.serial_no}}</td>
+        <td>{{p.created_at.date}}</td>
+        <td>{{p.updated_at}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.battery_status}}</td>
+        <td>{{p.battery_voltage}}</td>
+        <td>{{p.power_panel}}</td>
+        <td>{{p.panel_voltage}}</td>
+        <td>{{p.energy_curr}}</td>
+        <td>{{p.total_energy}}</td>
+        {% for u in user %} {% for p in u %}
+        <td>{{p.username}}</td>
+        {% endfor %} {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
 {% endblock body %}

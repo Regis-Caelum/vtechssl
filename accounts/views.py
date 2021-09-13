@@ -130,13 +130,13 @@ def ViewUsers(request):
         return
     pass
 
-# @login_required(login_url='/login')
+@login_required(login_url='/login')
 def ViewProduct(request):
-    # if request.method == 'POST':
-        # name = request.POST['name']
+    if request.method == 'POST':
+        name = request.POST['name']
         # e_date = request.POST['date']
         name = 'mani'
-        products = product.objects.filter(serial_no='123456789')
+        products = product.objects.filter(belongs_to__username=name)
         if products is None:
             print('None')
             return Http404
@@ -148,7 +148,7 @@ def ViewProduct(request):
             'user': users
         }
         return render(request, '../templates/table.html',context)
-    # return
+    return render(request, '../templates/table.html')
 
 @login_required(login_url='/login')
 @permission_required('accounts.add_user')
@@ -168,7 +168,7 @@ def login(request):
         if user is None:
             return redirect('/login')
         else:
-            return redirect('/dashboard')
+            return redirect('/table')
     return render(request,'../templates/login.html')
 
 @login_required(login_url='/login')
