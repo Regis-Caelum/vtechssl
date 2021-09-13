@@ -130,7 +130,7 @@ def ViewUsers(request):
         return
     pass
 
-@login_required(login_url='/login')
+# @login_required(login_url='/login')
 def ViewProduct(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -168,7 +168,7 @@ def login(request):
         if user is None:
             return redirect('/login')
         else:
-            return redirect('/table')
+            return redirect('Table')
     return render(request,'../templates/login.html')
 
 @login_required(login_url='/login')
