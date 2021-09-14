@@ -33,7 +33,7 @@ def postdata(request):
     pr = product.objects.get(serial_no=serial)
 
     if pr is None:
-        return Http404
+        return HttpResponse('serial no not found')
     return HttpResponse("Data updated")
     
     pr.attribute = 'puppi'
