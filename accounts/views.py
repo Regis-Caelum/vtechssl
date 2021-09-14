@@ -22,6 +22,7 @@ def postdata(request):
     print()
     print()
     serial = request.POST["serial"]
+    print(serial)
     status = request.POST["stat"]
     battery_status = request.POST["batstat"]
     battery_voltage = request.POST["volt"]
@@ -34,6 +35,7 @@ def postdata(request):
 
     if pr is None:
         return HttpResponse('serial no not found')
+    print(pr)
     return HttpResponse("Data updated")
     
     pr.attribute = 'puppi'
