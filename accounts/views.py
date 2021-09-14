@@ -4,17 +4,26 @@ from django.contrib.auth import authenticate
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import product
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
 # Home Page 
 def index(request):
     return render(request, '../templates/home.html')
-
+@csrf_exempt
 def postdata(request):
-    serial = request.GET["serial"]
-    status = request.GET["stat"]
-    battery_status = request.GET["batstat"]
+    print()
+    print(request.headers)
+    print(request.body)
+    print()
+    print()
+    print(request.POST)
+    print()
+    print()
+    serial = request.GET.get("serial")
+    status = request.GET.get("stat")
+    battery_status = request.POST["batstat"]
     battery_voltage = request.GET["volt"]
     power_panel = request.GET["powpanel"]
     panel_voltage = request.GET["panelvolt"]
@@ -163,6 +172,7 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        print(request.POST)
         user = authenticate(username=username, password=password)
         if user is None:
             return redirect('/login')
