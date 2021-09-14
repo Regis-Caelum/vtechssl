@@ -21,19 +21,20 @@ def postdata(request):
     print(request.POST)
     print()
     print()
-    serial = request.GET.get("serial")
-    status = request.GET.get("stat")
+    serial = request.POST["serial"]
+    status = request.POST["stat"]
     battery_status = request.POST["batstat"]
-    battery_voltage = request.GET["volt"]
-    power_panel = request.GET["powpanel"]
-    panel_voltage = request.GET["panelvolt"]
-    Energy_curr = request.GET["engcurr"]
-    Total_energy = request.GET["totaleng"]
+    battery_voltage = request.POST["volt"]
+    power_panel = request.POST["powpanel"]
+    panel_voltage = request.POST["panelvolt"]
+    Energy_curr = request.POST["engcurr"]
+    Total_energy = request.POST["totaleng"]
     
     pr = product.objects.get(serial_no=serial)
 
     if pr is None:
         return Http404
+    return HttpResponse("Data updated")
     
     pr.attribute = 'puppi'
     pr.status = status
